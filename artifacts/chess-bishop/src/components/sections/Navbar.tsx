@@ -18,6 +18,7 @@ export function Navbar() {
     { label: "Events", href: "/events" },
     { label: "Blog", href: "/blog" },
     { label: "Careers", href: "/careers" },
+    { label: "Contact", href: "/contact" },
   ];
 
   function navigate(href: string) {
