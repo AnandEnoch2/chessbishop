@@ -16,6 +16,7 @@ export function Navbar() {
     { label: "About", href: "/about" },
     { label: "Courses", href: "/courses" },
     { label: "Events", href: "/events" },
+    { label: "Tournaments", href: "/tournaments" },
     { label: "Blog", href: "/blog" },
     { label: "Careers", href: "/careers" },
     { label: "Contact", href: "/contact" },

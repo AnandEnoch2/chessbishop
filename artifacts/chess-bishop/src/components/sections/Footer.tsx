@@ -7,6 +7,7 @@ const quickLinks = [
   { label: "About Us", href: "/about" },
   { label: "Coaching Services", href: "/courses" },
   { label: "Tournament Calendar", href: "/events" },
+  { label: "International Tournaments", href: "/tournaments" },
   { label: "Blog & Resources", href: "/blog" },
   { label: "Careers", href: "/careers" },
   { label: "Contact", href: "/contact" },
