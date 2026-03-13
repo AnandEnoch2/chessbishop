@@ -1,0 +1,22 @@
+packages:
+  "framer-motion": "For elegant scroll animations, floating pieces, and premium transitions"
+  "react-hook-form": "For robust contact form state management"
+  "@hookform/resolvers": "For connecting Zod validation to react-hook-form"
+  "zod": "For strict schema validation of the contact form"
+  "clsx": "For conditional tailwind class merging"
+  "tailwind-merge": "For resolving tailwind class conflicts"
+  "react-countup": "For animated statistic counters"
+  "react-intersection-observer": "For triggering animations when elements scroll into view"
+
+images:
+  - path: "artifacts/chess-bishop/public/images/hero-bg.png"
+    description: "Abstract elegant 3D chessboard floating in dark navy space with cinematic lighting, depth of field, and subtle glowing gold particles"
+    aspect_ratio: "16:9"
+  - path: "artifacts/chess-bishop/public/images/coach.png"
+    description: "Professional cinematic portrait of a grandmaster chess coach sitting at an elegant wooden chessboard, dimly lit sophisticated room, high contrast, rim lighting"
+    aspect_ratio: "3:4"
+
+notes:
+  - Mocking backend contact form submissions with a simulated delay mutation
+  - Using framer-motion for complex staggered animations
+  - Implementing CSS-only glassmorphism for premium feel
