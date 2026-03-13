@@ -2,6 +2,11 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Button } from "@/components/ui/button";
 
+function scrollTo(id: string) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
 export function WelcomeChess() {
   const { ref, inView } = useInView({ threshold: 0.15, triggerOnce: true });
 
@@ -54,20 +59,17 @@ export function WelcomeChess() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-4"
           >
-            <a href="#courses">
-              <Button size="lg" className="px-8 bg-amber-600 hover:bg-amber-700 text-white border-0">
-                Start Now
-              </Button>
-            </a>
-            <a href="#about">
-              <Button
-                variant="outline"
-                size="lg"
-                className="px-8 border-gray-400 text-gray-700 hover:bg-gray-100"
-              >
-                Learn More
-              </Button>
-            </a>
+            <Button size="lg" className="px-8 bg-amber-600 hover:bg-amber-700 text-white border-0" onClick={() => scrollTo("courses")}>
+              Start Now
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              className="px-8 border-gray-400 text-gray-700 hover:bg-gray-100"
+              onClick={() => scrollTo("about")}
+            >
+              Learn More
+            </Button>
           </motion.div>
         </div>
       </div>

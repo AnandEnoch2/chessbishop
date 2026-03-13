@@ -1,6 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
+function scrollTo(id: string) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
 export function Hero() {
   const floatingPieces = ["♚", "♛", "♜", "♝", "♞", "♟"];
 
@@ -74,16 +79,12 @@ export function Hero() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="#contact" className="w-full sm:w-auto">
-              <Button size="lg" className="w-full sm:w-auto text-lg px-8">
-                Book a Free Lesson
-              </Button>
-            </a>
-            <a href="#courses" className="w-full sm:w-auto">
-              <Button variant="glass" size="lg" className="w-full sm:w-auto text-lg px-8">
-                Explore Courses
-              </Button>
-            </a>
+            <Button size="lg" className="w-full sm:w-auto text-lg px-8" onClick={() => scrollTo("contact")}>
+              Book a Free Lesson
+            </Button>
+            <Button variant="glass" size="lg" className="w-full sm:w-auto text-lg px-8" onClick={() => scrollTo("courses")}>
+              Explore Courses
+            </Button>
           </div>
         </motion.div>
       </div>

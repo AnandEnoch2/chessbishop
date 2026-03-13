@@ -1,4 +1,3 @@
-import { Link } from "wouter";
 import { Crown, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { useScroll } from "@/hooks/use-scroll";
@@ -6,16 +5,23 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 
+function scrollTo(id: string) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
 export function Navbar() {
   const scrolled = useScroll(50);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const links = [
-    { label: "Home", href: "#home" },
-    { label: "About", href: "#about" },
-    { label: "Courses", href: "#courses" },
-    { label: "Events", href: "#events" },
-    { label: "Blog", href: "#blog" },
+    { label: "Home", id: "home" },
+    { label: "About", id: "about" },
+    { label: "Courses", id: "courses" },
+    { label: "Events", id: "events" },
+    { label: "Blog", id: "blog" },
   ];
 
   return (
@@ -28,34 +34,40 @@ export function Navbar() {
       )}
     >
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
-        <a href="#home" className="flex items-center gap-2 group">
+        <button
+          onClick={() => scrollTo("home")}
+          className="flex items-center gap-2 group"
+        >
           <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center border border-primary/50 group-hover:bg-primary/30 transition-colors">
             <Crown className="w-5 h-5 text-primary" />
           </div>
           <span className="font-display font-bold text-xl text-white tracking-wider">
             Chess<span className="text-primary">Bishop</span>
           </span>
-        </a>
+        </button>
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
           <ul className="flex items-center gap-8">
             {links.map((link) => (
               <li key={link.label}>
-                <a
-                  href={link.href}
+                <button
+                  onClick={() => scrollTo(link.id)}
                   className="text-sm font-medium text-white/70 hover:text-primary transition-colors"
                 >
                   {link.label}
-                </a>
+                </button>
               </li>
             ))}
           </ul>
-          <a href="#contact">
-            <Button variant="default" size="sm" className="hidden lg:flex">
-              Start Learning
-            </Button>
-          </a>
+          <Button
+            variant="default"
+            size="sm"
+            className="hidden lg:flex"
+            onClick={() => scrollTo("contact")}
+          >
+            Start Learning
+          </Button>
         </nav>
 
         {/* Mobile Toggle */}
@@ -78,18 +90,20 @@ export function Navbar() {
           >
             <nav className="container mx-auto px-4 py-6 flex flex-col gap-4">
               {links.map((link) => (
-                <a
+                <button
                   key={link.label}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="text-lg font-medium text-white/80 hover:text-primary py-2 border-b border-white/5"
+                  onClick={() => { scrollTo(link.id); setMobileOpen(false); }}
+                  className="text-left text-lg font-medium text-white/80 hover:text-primary py-2 border-b border-white/5"
                 >
                   {link.label}
-                </a>
+                </button>
               ))}
-              <a href="#contact" onClick={() => setMobileOpen(false)} className="mt-4">
-                <Button className="w-full">Start Learning</Button>
-              </a>
+              <Button
+                className="w-full mt-4"
+                onClick={() => { scrollTo("contact"); setMobileOpen(false); }}
+              >
+                Start Learning
+              </Button>
             </nav>
           </motion.div>
         )}
