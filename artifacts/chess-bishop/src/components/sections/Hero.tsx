@@ -1,13 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { useLocation } from "wouter";
 
-function scrollTo(id: string) {
-  const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+function navigate(setLocation: (href: string) => void, href: string) {
+  setLocation(href);
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 export function Hero() {
   const floatingPieces = ["♚", "♛", "♜", "♝", "♞", "♟"];
+  const [, setLocation] = useLocation();
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
@@ -79,10 +81,10 @@ export function Hero() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button size="lg" className="w-full sm:w-auto text-lg px-8" onClick={() => scrollTo("contact")}>
+            <Button size="lg" className="w-full sm:w-auto text-lg px-8" onClick={() => navigate(setLocation, "/contact")}>
               Book a Free Lesson
             </Button>
-            <Button variant="glass" size="lg" className="w-full sm:w-auto text-lg px-8" onClick={() => scrollTo("courses")}>
+            <Button variant="glass" size="lg" className="w-full sm:w-auto text-lg px-8" onClick={() => navigate(setLocation, "/courses")}>
               Explore Courses
             </Button>
           </div>

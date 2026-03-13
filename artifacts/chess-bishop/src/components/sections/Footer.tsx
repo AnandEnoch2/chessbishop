@@ -1,21 +1,24 @@
 import { Crown, Twitter, Facebook, Instagram, Youtube, Send } from "lucide-react";
+import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-function scrollTo(id: string) {
-  const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-}
-
 const quickLinks = [
-  { label: "About Us", id: "about" },
-  { label: "Coaching Services", id: "courses" },
-  { label: "Tournament Calendar", id: "events" },
-  { label: "Blog & Resources", id: "blog" },
-  { label: "Contact", id: "contact" },
+  { label: "About Us", href: "/about" },
+  { label: "Coaching Services", href: "/courses" },
+  { label: "Tournament Calendar", href: "/events" },
+  { label: "Blog & Resources", href: "/blog" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export function Footer() {
+  const [, setLocation] = useLocation();
+
+  function navigate(href: string) {
+    setLocation(href);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
   return (
     <footer className="bg-background border-t border-white/5 pt-20 pb-10">
       <div className="container mx-auto px-4 md:px-6">
@@ -23,7 +26,7 @@ export function Footer() {
           
           {/* Brand */}
           <div className="lg:col-span-1">
-            <button onClick={() => scrollTo("home")} className="flex items-center gap-2 mb-6">
+            <button onClick={() => navigate("/")} className="flex items-center gap-2 mb-6">
               <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
                 <Crown className="w-5 h-5 text-primary-foreground" />
               </div>
@@ -50,7 +53,7 @@ export function Footer() {
               {quickLinks.map((link) => (
                 <li key={link.label}>
                   <button
-                    onClick={() => scrollTo(link.id)}
+                    onClick={() => navigate(link.href)}
                     className="text-white/60 hover:text-primary transition-colors text-sm"
                   >
                     {link.label}

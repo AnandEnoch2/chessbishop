@@ -1,28 +1,29 @@
 import { Crown, Menu, X } from "lucide-react";
 import { useState } from "react";
+import { useLocation } from "wouter";
 import { useScroll } from "@/hooks/use-scroll";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 
-function scrollTo(id: string) {
-  const el = document.getElementById(id);
-  if (el) {
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-}
-
 export function Navbar() {
   const scrolled = useScroll(50);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [location, setLocation] = useLocation();
 
   const links = [
-    { label: "Home", id: "home" },
-    { label: "About", id: "about" },
-    { label: "Courses", id: "courses" },
-    { label: "Events", id: "events" },
-    { label: "Blog", id: "blog" },
+    { label: "Home", href: "/" },
+    { label: "About", href: "/about" },
+    { label: "Courses", href: "/courses" },
+    { label: "Events", href: "/events" },
+    { label: "Blog", href: "/blog" },
   ];
+
+  function navigate(href: string) {
+    setLocation(href);
+    setMobileOpen(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 
   return (
     <header
@@ -35,7 +36,7 @@ export function Navbar() {
     >
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
         <button
-          onClick={() => scrollTo("home")}
+          onClick={() => navigate("/")}
           className="flex items-center gap-2 group"
         >
           <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center border border-primary/50 group-hover:bg-primary/30 transition-colors">
@@ -52,8 +53,13 @@ export function Navbar() {
             {links.map((link) => (
               <li key={link.label}>
                 <button
-                  onClick={() => scrollTo(link.id)}
-                  className="text-sm font-medium text-white/70 hover:text-primary transition-colors"
+                  onClick={() => navigate(link.href)}
+                  className={cn(
+                    "text-sm font-medium transition-colors",
+                    location === link.href
+                      ? "text-primary"
+                      : "text-white/70 hover:text-primary"
+                  )}
                 >
                   {link.label}
                 </button>
@@ -64,7 +70,7 @@ export function Navbar() {
             variant="default"
             size="sm"
             className="hidden lg:flex"
-            onClick={() => scrollTo("contact")}
+            onClick={() => navigate("/contact")}
           >
             Start Learning
           </Button>
@@ -92,15 +98,20 @@ export function Navbar() {
               {links.map((link) => (
                 <button
                   key={link.label}
-                  onClick={() => { scrollTo(link.id); setMobileOpen(false); }}
-                  className="text-left text-lg font-medium text-white/80 hover:text-primary py-2 border-b border-white/5"
+                  onClick={() => navigate(link.href)}
+                  className={cn(
+                    "text-left text-lg font-medium py-2 border-b border-white/5",
+                    location === link.href
+                      ? "text-primary"
+                      : "text-white/80 hover:text-primary"
+                  )}
                 >
                   {link.label}
                 </button>
               ))}
               <Button
                 className="w-full mt-4"
-                onClick={() => { scrollTo("contact"); setMobileOpen(false); }}
+                onClick={() => navigate("/contact")}
               >
                 Start Learning
               </Button>
